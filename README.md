@@ -152,7 +152,9 @@ src/
 
 ## 🏗️ My Implementation Notes
 
-[ARCHITECTURE DECISIONS](./ARCHITECTURE-DECISIONS.md)
+[ARCHITECTURE DECISIONS](./ARCHITECTURE-DECISIONS.md) 
+
+Concise documentation of key decisions, trade-offs, and future improvements
 
 ---
 
