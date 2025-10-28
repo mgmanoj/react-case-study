@@ -15,8 +15,8 @@ import { useURLState } from '@/hooks/useURLState';
 import { fetchProducts, getUniqueCategories } from './Products.service';
 import { PRODUCT_COLUMNS, PRODUCTS_PAGE_SIZE } from './Products.constants';
 import { Product } from './Products.types';
-import { ProductsTableView } from './Productstableview';
-import { ProductsCardView } from './Productscardview';
+import { ProductsTableView } from './ProductsTableView';
+import { ProductsCardView } from './ProductsCardView';
 
 export const Products: React.FC = () => {
   // State
@@ -227,15 +227,6 @@ export const Products: React.FC = () => {
           totalItems={totalItems}
         />
       )}
-
-      {/* Results Summary */}
-      <div className="mt-4 text-sm text-gray-600">
-        Showing {paginatedData.length} of {totalItems} products
-        {selectedCategory !== 'all' && ` in ${selectedCategory}`}
-        {sortConfig.key && sortConfig.direction !== 'none' && 
-          ` • Sorted by ${sortConfig.key} (${sortConfig.direction})`
-        }
-      </div>
     </PageLayout>
   );
 };
