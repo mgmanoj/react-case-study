@@ -348,6 +348,27 @@ const PRODUCT_COLUMNS: ColumnDef<Product>[] = [
 
 ---
 
+### **8. ErrorBoundary**
+
+#### **Decision: Graceful error handling**
+
+```typescript
+// ErrorBoundary
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
+```
+
+**Why:**
+- To catch javascript errors
+- For error reporting and monitoring
+- Must have since it provides an alternate UI instead of crashing the application while having JS errors
+- Shows a user friendly UI
+
+**Future Improvements:**
+- [ ] Add development enviornment error display( with more details)
+- [ ] Add proper logging for production errors
+
 ## 🎯 **Design Principles Applied**
 
 ### **1. SOLID Principles**
@@ -391,9 +412,9 @@ const PRODUCT_COLUMNS: ColumnDef<Product>[] = [
 ### **Migration Path:**
 
 **Phase 1 (Current):** Static JSON → Client-side operations
-**Phase 2 (1-2 months):** Add backend → Server-side pagination/sorting/filtering
-**Phase 3 (3-6 months):** Add React Query → Caching, optimistic updates
-**Phase 4 (6-12 months):** Scale further → Add indexes, CDN, Redis cache
+**Phase 2 :** Add backend → Server-side pagination/sorting/filtering
+**Phase 3 :** Add React Query → Caching, optimistic updates
+**Phase 4 :** Scale further → Add indexes, CDN, Redis cache
 
 ---
 

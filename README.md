@@ -100,11 +100,12 @@ src/
 │   │   ├── Sidebar/        # Responsive navigation sidebar
 │   │   └── Select/         # Dropdown select component
 │   │
-│   └── organisms/          # Complex components (4)
+│   └── organisms/          # Complex components (5)
 │       ├── Card/           # Compound card component
 │       ├── DataTable/      # Generic sortable table
 │       ├── Pagination/     # Pagination controls
 │       └── FilterBar/      # Filter container
+|       └── ErrorBoundary/  # ErrorBoundary for application
 │
 ├── hooks/                  # Custom hooks (6)
 │   ├── useSort/           # Sorting logic with types
