@@ -1,10 +1,10 @@
 /**
  * usePagination Hook
  * 
- * Generic hook for paginating data arrays.
- * Works with any data type.
+ * Generic hook for paginating data arrays with support for both
+ * client-side and server-side pagination.
  * 
- * @example
+ * @example Client-side pagination
  * ```tsx
  * const {
  *   paginatedData,
@@ -12,12 +12,21 @@
  *   totalPages,
  *   goToPage,
  * } = usePagination(products, { pageSize: 10 });
+ * ```
  * 
- * <Pagination
- *   currentPage={currentPage}
- *   totalPages={totalPages}
- *   onPageChange={goToPage}
- * />
+ * @example Server-side pagination
+ * ```tsx
+ * const {
+ *   paginatedData,
+ *   currentPage,
+ *   totalPages,
+ *   goToPage,
+ * } = usePagination(products, { 
+ *   pageSize: 10,
+ *   serverSide: true,
+ *   totalItems: 1000,
+ *   onPageChange: (page) => fetchProducts({ page })
+ * });
  * ```
  */
 
@@ -35,13 +44,21 @@ export function usePagination<T>(
   data: T[],
   options: UsePaginationOptions = {}
 ): UsePaginationReturn<T> {
-  const { initialPage = 1, pageSize = DEFAULT_PAGE_SIZE } = options;
+  const { 
+    initialPage = 1, 
+    pageSize = DEFAULT_PAGE_SIZE,
+    serverSide = false,
+    totalItems: serverTotalItems,
+    onPageChange: serverOnPageChange,
+  } = options;
 
   // Current page state
   const [currentPage, setCurrentPage] = useState(initialPage);
 
-  // Calculate pagination values
-  const totalItems = data.length;
+  // Calculate pagination values based on mode
+  const totalItems = serverSide && serverTotalItems !== undefined 
+    ? serverTotalItems 
+    : data.length;
   const totalPages = calculateTotalPages(totalItems, pageSize);
 
   // Validate and adjust current page if needed
@@ -51,17 +68,26 @@ export function usePagination<T>(
     }
   }, [totalPages, currentPage]);
 
-  // Reset to page 1 when data changes significantly
+  // Reset to page 1 when data changes significantly (client-side only)
   useEffect(() => {
-    setCurrentPage(1);
-  }, [data.length]);
+    if (!serverSide) {
+      setCurrentPage(1);
+    }
+  }, [data.length, serverSide]);
 
   /**
    * Get paginated data for current page
+   * For server-side pagination, data is already paginated from server
+   * For client-side pagination, slice the data array
    */
   const paginatedData = useMemo(() => {
+    if (serverSide) {
+      // Server-side: data is already paginated
+      return data;
+    }
+    // Client-side: paginate the data array
     return paginateData(data, currentPage, pageSize);
-  }, [data, currentPage, pageSize]);
+  }, [data, currentPage, pageSize, serverSide]);
 
   /**
    * Calculate display indices (1-indexed for UI)
@@ -85,13 +111,19 @@ export function usePagination<T>(
 
   /**
    * Go to specific page
+   * Triggers server-side callback if in server-side mode
    */
   const goToPage = useCallback(
     (page: number) => {
       const validPage = validatePageNumber(page, totalPages);
       setCurrentPage(validPage);
+      
+      // Trigger server-side page change if applicable
+      if (serverSide && serverOnPageChange) {
+        serverOnPageChange(validPage);
+      }
     },
-    [totalPages]
+    [totalPages, serverSide, serverOnPageChange]
   );
 
   /**

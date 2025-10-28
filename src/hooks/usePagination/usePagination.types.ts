@@ -17,6 +17,26 @@ export interface UsePaginationOptions {
    * @default 10
    */
   pageSize?: number;
+
+  /**
+   * Enable server-side pagination mode
+   * When true, expects data to be already paginated from server
+   * @default false
+   */
+  serverSide?: boolean;
+
+  /**
+   * Total number of items on server (for server-side pagination)
+   * Required when serverSide is true
+   */
+  totalItems?: number;
+
+  /**
+   * Callback triggered when page changes (for server-side pagination)
+   * Use this to fetch new data from server
+   * @param page - The new page number
+   */
+  onPageChange?: (page: number) => void;
 }
 
 /**
