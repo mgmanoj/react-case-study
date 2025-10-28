@@ -4,10 +4,11 @@
  * Individual table row.
  */
 
+import { JSX, memo, MemoExoticComponent } from 'react';
 import { DataTableRowProps } from './DataTable.types';
 import { DataTableCell } from './DataTableCell';
 
-export function DataTableRow<T extends Record<string, unknown>>({
+function DataTableRowComponent<T extends Record<string, unknown>>({
   item,
   index,
   columns,
@@ -59,4 +60,12 @@ export function DataTableRow<T extends Record<string, unknown>>({
   );
 }
 
-DataTableRow.displayName = 'DataTableRow';
+DataTableRowComponent.displayName = 'DataTableRow';
+
+/**
+ * Memoized DataTableRow - CRITICAL PERFORMANCE OPTIMIZATION
+ * Prevents unnecessary re-renders of rows whose data has not changed.
+ */
+export const DataTableRow = memo(DataTableRowComponent) as <T>(props: DataTableRowProps<T>) => JSX.Element;
+
+(DataTableRow as MemoExoticComponent<any>).displayName = 'DataTableRow';

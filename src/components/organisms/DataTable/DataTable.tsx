@@ -19,8 +19,9 @@ import { DataTableProps } from './DataTable.types';
 import { DataTableHeader } from './DataTableHeader';
 import { DataTableBody } from './DataTableBody';
 import { getDefaultRowKey } from './DataTable.utils';
+import { JSX, memo, MemoExoticComponent } from 'react';
 
-export function DataTable<T extends Record<string, unknown>>({
+function DataTableComponent<T extends Record<string, unknown>>({
   data,
   columns,
   sortConfig,
@@ -76,4 +77,13 @@ export function DataTable<T extends Record<string, unknown>>({
   );
 }
 
-DataTable.displayName = 'DataTable';
+DataTableComponent.displayName = 'DataTable';
+
+/**
+ * Memoized DataTable with custom comparison function
+ * to prevent unnecessary re-renders.
+ */
+
+export const DataTable = memo(DataTableComponent) as <T>(props: DataTableProps<T>) => JSX.Element;
+
+(DataTable as MemoExoticComponent<any>).displayName = 'DataTable';
