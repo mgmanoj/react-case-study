@@ -150,12 +150,13 @@ src/
 
 ---
 
-```markdown
 ## 🏗️ My Implementation Notes
 
 [ARCHITECTURE DECISIONS](./ARCHITECTURE-DECISIONS.md)
 
 ---
+
+```markdown
 
 ## 💎 Evaluation Criteria
 
