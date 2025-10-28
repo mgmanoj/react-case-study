@@ -422,7 +422,7 @@ const PRODUCT_COLUMNS: ColumnDef<Product>[] = [
 
 ---
 
-**Status:** Production-ready for current scale, designed to scale to 10,000+ items
+**Tools used:** AI tool is used to generate typescrpt documentation and overall refactoring of code.
 
 **Philosophy:** Start simple, optimize strategically, scale when needed
 
