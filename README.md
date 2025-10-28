@@ -18,8 +18,8 @@ Welcome to the ProductsUp take-home challenge! This exercise is designed to eval
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
-cd react-takehome-case
+git clone https://github.com/mgmanoj/react-case-study.git
+cd react-case-study
 
 # Install dependencies
 npm install
@@ -83,6 +83,80 @@ Make the product table responsive across all devices:
 
 ---
 
+## 📁 Project Structure
+
+```typescript
+src/
+├── components/              # Atomic Design components
+│   ├── atoms/              # Basic building blocks (4)
+│   │   ├── Button/         # Button.tsx, Button.types.ts, Button.variants.ts
+│   │   ├── Badge/          # Badge component with variants
+│   │   ├── Icon/           # Icon wrapper for Lucide
+│   │   └── Skeleton/       # Loading skeletons
+│   │
+│   ├── molecules/          # Simple compositions (4)
+│   │   ├── Header/         # App header with navigation
+│   │   ├── Footer/         # App footer
+│   │   ├── Sidebar/        # Responsive navigation sidebar
+│   │   └── Select/         # Dropdown select component
+│   │
+│   └── organisms/          # Complex components (4)
+│       ├── Card/           # Compound card component
+│       ├── DataTable/      # Generic sortable table
+│       ├── Pagination/     # Pagination controls
+│       └── FilterBar/      # Filter container
+│
+├── hooks/                  # Custom hooks (6)
+│   ├── useSort/           # Sorting logic with types
+│   ├── usePagination/     # Pagination logic
+│   ├── useFilter/         # Filtering logic
+│   ├── useURLState/       # URL state synchronization
+│   ├── useResponsive/     # Responsive breakpoint detection
+│   └── useDebounce/       # (Planned - in roadmap)
+│
+├── pages/                  # Page components (2)
+│   ├── Products/          # Main products page
+│   │   ├── Products.tsx
+│   │   ├── Products.types.ts
+│   │   ├── Products.service.ts
+│   │   ├── Products.constants.ts
+│   │   └── components/    # ProductsTableView, ProductsCardView
+│   └── About/             # About page
+│
+├── layouts/                # Layout templates (2)
+│   ├── AppLayout/         # Main app layout
+│   └── PageLayout/        # Page wrapper layout
+│
+├── types/                  # Shared TypeScript types
+│   └── common.types.ts
+│
+├── utils/                  # Utility functions
+│   ├── accessibility/     # ARIA helpers
+│   └── format/            # Formatting utilities
+│
+└── constants/              # App constants
+    └── app.constants.ts
+```
+
+---
+
+## 🛠️ Tech Stack
+
+- **React 19** - UI framework
+- **Tailwind CSS v4** - Styling (using @tailwindcss/vite)
+- **Vite** - Build tool
+- **Lucide React** - Icon library (optional)
+- **React Router** - Available if needed (currently using state-based routing)
+
+---
+
+```markdown
+## 🏗️ My Implementation Notes
+
+[ARCHITECTURE DECISIONS](./ARCHITECTURE-DECISIONS.md)
+
+---
+
 ## 💎 Evaluation Criteria
 
 Your submission will be evaluated on:
@@ -128,87 +202,6 @@ Impress us with:
 - ⭐ **Animations** - Subtle transitions using Tailwind or CSS
 - ⭐ **Error Boundaries** - Graceful error handling
 - ⭐ **URL State** - Persist filter/sort/page state in URL params
-
----
-
-## 📁 Project Structure
-
-```
-src/
-├── App.jsx              # Main application component
-├── main.jsx             # Application entry point
-├── index.css            # Tailwind imports
-└── components/          # (You may create this)
-    ├── Header.jsx
-    ├── Sidebar.jsx
-    ├── Footer.jsx
-    ├── ProductsPage.jsx
-    └── ...
-```
-
-**Note:** Feel free to restructure as you see fit. We want to see YOUR architectural decisions.
-
----
-
-## 🛠️ Tech Stack
-
-- **React 19** - UI framework
-- **Tailwind CSS v4** - Styling (using @tailwindcss/vite)
-- **Vite** - Build tool
-- **Lucide React** - Icon library (optional)
-- **React Router** - Available if needed (currently using state-based routing)
-
----
-
-## 📝 Submission Guidelines
-
-### What to Submit
-
-1. **GitHub Repository**
-
-   - Push your completed code to a public GitHub repo
-   - Include this README with any updates/notes
-
-2. **README Updates** (Add a section below)
-
-   - Document your architectural decisions
-   - Explain any trade-offs you made
-   - List what you'd improve with more time
-   - Note any assumptions you made
-
-3. **Code Comments**
-   - Add comments for complex logic
-   - Explain non-obvious decisions
-
-### Example README Section to Add:
-
-```markdown
-## 🏗️ My Implementation Notes
-
-### Architecture Decisions
-
-- Created custom `usePagination` hook to encapsulate pagination logic...
-- Chose to keep sorting state in ProductsPage rather than global state because...
-
-### Trade-offs
-
-- Implemented client-side pagination due to time constraints. For production, I'd...
-- Used simple category filter instead of multi-select to focus on core requirements...
-
-### What I'd Improve
-
-- Add unit tests for sorting and pagination logic
-- Implement virtualization for 10k+ products
-- Add debounced search functionality
-- Better error handling and loading states
-
-### Time Breakdown
-
-- Sorting: 1 hour
-- Pagination: 1.5 hours
-- Responsive layout: 1 hour
-- Polish & refactoring: 30 minutes
-```
 
 ---
 
